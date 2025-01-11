@@ -1,0 +1,1 @@
+"Strings" is a music application with some additional features
