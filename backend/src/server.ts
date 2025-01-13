@@ -1,3 +1,17 @@
+import app from "./app";
 import { Config } from "./config";
 
-console.log(Config.PORT, Config.NODE_ENV);
+const startServer = () => {
+    try {
+        app.listen(Config.PORT, () =>
+            console.log(
+                `Server listening. Go to http://localhost:${Config.PORT}`
+            )
+        );
+    } catch (error) {
+        console.log(`Error while initiating the server`);
+        process.exit(1);
+    }
+};
+
+startServer();
