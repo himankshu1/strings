@@ -1,16 +1,16 @@
-import logger from "./config/logger";
-import express, { NextFunction, Request, Response } from "express";
-import { HttpError } from "http-errors";
-import userRoutes from "./routes/user.route";
-import cors from "cors";
-import { Config } from "./config";
-import cookieParser from "cookie-parser";
+import logger from './config/logger';
+import express, { NextFunction, Request, Response } from 'express';
+import { HttpError } from 'http-errors';
+import userRoutes from './routes/user.route';
+import cors from 'cors';
+import { Config } from './config';
+import cookieParser from 'cookie-parser';
 
 //* creating an express instance
 const app = express();
 
 //* middlewares
-app.use(express.json({ limit: "16kb" }));
+app.use(express.json({ limit: '16kb' }));
 app.use(
     cors({
         origin: Config.CORS_ORIGIN,
@@ -20,11 +20,7 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", async (req: Request, res: Response, next: NextFunction) => {
-    res.send("hello");
-});
-
-app.use("/api/users", userRoutes);
+app.use('/api/users', userRoutes);
 
 //? Global Error Handler
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
@@ -36,8 +32,8 @@ app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
             {
                 type: err.name,
                 message: err.message,
-                path: "",
-                location: "",
+                path: '',
+                location: '',
             },
         ],
     });
