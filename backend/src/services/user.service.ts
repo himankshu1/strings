@@ -6,11 +6,12 @@ type CreateUserParamsType = {
     fullName: string;
     email: string;
     password: string;
+    role?: ['user', 'admin'];
     imageUrl?: string;
 };
 
 export const createUser = async (
-    { fullName, email, password, imageUrl }: CreateUserParamsType,
+    { fullName, email, password, role, imageUrl }: CreateUserParamsType,
     res: Response
 ): Promise<any> => {
     try {
@@ -25,6 +26,7 @@ export const createUser = async (
             fullName,
             email,
             password,
+            role,
             imageUrl,
         });
 

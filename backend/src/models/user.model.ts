@@ -7,6 +7,7 @@ interface IUserSchema extends Document {
     fullName: string;
     email: string;
     password: string;
+    role: string;
     imageUrl?: string;
 
     generateJWT(): string;
@@ -28,6 +29,11 @@ const userSchema = new mongoose.Schema<IUserSchema>(
             type: String,
             required: true,
             min: [6, 'password must be atleast 6 characters'],
+        },
+        role: {
+            type: String,
+            enum: ['user', 'admin'],
+            default: 'user',
         },
         imageUrl: {
             type: String,
