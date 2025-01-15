@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { createUser, signinUser } from '../services/user.service';
+import { IRequestWithUser } from '../middlewares/auth.middleware';
+import { UserModel } from '../models/user.model';
 
 export const registerUser: any = async (req: Request, res: Response) => {
     //* validate request
@@ -65,4 +67,20 @@ export const loginUser: any = async (req: Request, res: Response) => {
             message: 'User logged in successfully',
             data: result.isUserFound,
         });
+};
+
+export const logoutUser: any = async (req: IRequestWithUser, res: Response) => {
+    const isUserFound = await UserModel.findOne({ email: req.user?.email });
+
+    if (!isUserFound) {
+        res.status(401).json({
+            success: false,
+            message: 'Unauthorized access. Please login again',
+        });
+    }
+
+    res.clearCookie('token').json({
+        success: true,
+        message: 'User logged out successfully',
+    });
 };
