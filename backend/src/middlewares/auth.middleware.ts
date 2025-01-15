@@ -6,6 +6,7 @@ export interface IRequestWithUser extends Request {
     user?: jwt.JwtPayload;
 }
 
+//* verifying the token
 export const verifyJwt = async (
     req: IRequestWithUser,
     res: Response,
@@ -38,4 +39,22 @@ export const verifyJwt = async (
             message: 'Invalid or expired token. Please login again.',
         });
     }
+};
+
+//* checking if the request is from an admin user type
+export const checkAdmin = async (
+    req: IRequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    const { role } = req.user as jwt.JwtPayload;
+
+    if (role !== 'admin') {
+        res.status(401).json({
+            success: false,
+            message: 'Not an admin user. Please login as admin user',
+        });
+    }
+
+    next();
 };

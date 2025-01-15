@@ -59,6 +59,7 @@ userSchema.methods.generateJWT = function (): string {
         id: this._id,
         fullName: this.fullName,
         email: this.email,
+        role: this.role,
     };
 
     return jwt.sign(payload, Config.JWT_SECRET as string, {
