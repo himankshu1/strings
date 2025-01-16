@@ -234,7 +234,8 @@ export const deleteAlbum = async (req: Request, res: Response) => {
             });
         }
 
-        //* finding and deleting the album
+        //* finding and deleting the album and its songs
+        await Song.deleteMany({ albumId });
         const isAlbumDeleted = await Album.findByIdAndDelete(albumId);
 
         if (!isAlbumDeleted) {
