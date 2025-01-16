@@ -221,3 +221,44 @@ export const createAlbum = async (req: Request, res: Response) => {
         }
     }
 };
+
+//* delete an album
+export const deleteAlbum = async (req: Request, res: Response) => {
+    try {
+        const albumId = req.params.id;
+
+        if (!albumId) {
+            res.status(404).json({
+                success: false,
+                message: 'Please share the album id to delete',
+            });
+        }
+
+        //* finding and deleting the album
+        const isAlbumDeleted = await Album.findByIdAndDelete(albumId);
+
+        if (!isAlbumDeleted) {
+            res.status(400).json({
+                success: false,
+                message:
+                    "Couldn't delete the album. Please validate the album id",
+            });
+        }
+
+        //* sending response after successful deletion
+        res.status(202).json({
+            success: true,
+            message: 'Album was deleted successful',
+            data: isAlbumDeleted,
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof Error) {
+            logger.error("Couldn't delete the album", { error: error.message });
+        } else {
+            logger.error("Couldn't delete the album", {
+                error: JSON.stringify(error),
+            });
+        }
+    }
+};
