@@ -11,12 +11,12 @@ import { upload } from '../middlewares/multer.middleware';
 
 const router = Router();
 
-router.get('/get-admin', verifyJwt, verifyAdmin, getAdminProfile);
+router.use(verifyJwt, verifyAdmin);
+
+router.get('/get-admin', getAdminProfile);
 
 router.post(
     '/upload-song',
-    verifyJwt,
-    verifyAdmin,
     upload.fields([
         { name: 'image', maxCount: 1 },
         { name: 'song', maxCount: 1 },
@@ -24,7 +24,7 @@ router.post(
     uploadSong
 );
 
-router.delete('/delete-song/:id', verifyJwt, verifyAdmin, deleteSong);
+router.delete('/delete-song/:id', deleteSong);
 
 router.post(
     '/create-album',
@@ -33,6 +33,6 @@ router.post(
     upload.single('image'),
     createAlbum
 );
-router.delete('/delete-album/:id', verifyJwt, verifyAdmin, deleteAlbum);
+router.delete('/delete-album/:id', deleteAlbum);
 
 export default router;
