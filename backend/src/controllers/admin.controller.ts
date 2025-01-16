@@ -6,6 +6,7 @@ import { uploadToCloudinary } from '../config/cloudinary';
 import { UploadApiResponse } from 'cloudinary';
 import { Song } from '../models/song.model';
 import { Album } from '../models/album.model';
+import logger from '../config/logger';
 
 export interface ExtendedUploadApiResponse extends UploadApiResponse {
     duration?: number; // Add duration for audio/video files
@@ -108,6 +109,54 @@ export const uploadSong = async (req: Request, res: Response): Promise<any> => {
         res.status(500).json({
             success: false,
             message: 'An error occurred while uploading files.',
+        });
+    }
+};
+
+//* deleting a song
+export const deleteSong = async (req: Request, res: Response): Promise<any> => {
+    try {
+        //* validate request
+        if (!req.params.id) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide the song id',
+            });
+        }
+
+        console.log(req.params.id);
+
+        //* find and delete the song
+        const deleteResponse = await Song.findByIdAndDelete(req.params.id);
+
+        //* return response
+        if (!deleteResponse) {
+            return res.status(500).json({
+                success: false,
+                message: 'Something went wrong while deleting the song',
+            });
+        }
+
+        return res.status(202).json({
+            success: true,
+            message: 'Song deleted successfully',
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof Error) {
+            logger.error('Error while deleting the song', {
+                error: error.message,
+                stack: error.stack,
+            });
+        } else {
+            logger.error('Error while deleting the song', {
+                error: JSON.stringify(error),
+            });
+        }
+
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong while deleting the song',
         });
     }
 };
