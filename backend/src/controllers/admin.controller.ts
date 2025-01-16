@@ -26,7 +26,7 @@ export const uploadSong = async (req: Request, res: Response): Promise<any> => {
     try {
         // Validate request
         const { title, artist, albumId } = req.body;
-        if (!title || !artist || !albumId) {
+        if (!title || !artist) {
             res.status(400).json({
                 success: false,
                 message: 'Please provide all the fields',

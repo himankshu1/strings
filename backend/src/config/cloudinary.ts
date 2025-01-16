@@ -34,6 +34,9 @@ export const uploadToCloudinary = async (
         const uploadResults = await Promise.all(uploadPromises);
         // console.log('uploadResults', uploadResults);
 
+        //* deleting files from local after success resposne from cloudinary
+        localFilePaths.map((localPath) => fs.unlinkSync(localPath));
+
         //* return the upload results
         return uploadResults;
     } catch (error) {
