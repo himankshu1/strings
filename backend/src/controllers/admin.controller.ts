@@ -129,11 +129,17 @@ export const deleteSong = async (req: Request, res: Response): Promise<any> => {
         //* find and delete the song
         const deleteResponse = await Song.findByIdAndDelete(req.params.id);
 
+        //* find if the song belongs to an album and delete from the album
+        if (deleteResponse?.albumId) {
+            await Album.findByIdAndDelete(deleteResponse?.albumId);
+        }
+
         //* return response
         if (!deleteResponse) {
             return res.status(500).json({
                 success: false,
-                message: 'Something went wrong while deleting the song',
+                message:
+                    'Something went wrong while deleting the song could not find',
             });
         }
 
