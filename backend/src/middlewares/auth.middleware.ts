@@ -42,7 +42,7 @@ export const verifyJwt = async (
 };
 
 //* checking if the request is from an admin user type
-export const checkAdmin = async (
+export const verifyAdmin = async (
     req: IRequestWithUser,
     res: Response,
     next: NextFunction
