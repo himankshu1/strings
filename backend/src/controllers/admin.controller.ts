@@ -166,3 +166,58 @@ export const deleteSong = async (req: Request, res: Response): Promise<any> => {
         });
     }
 };
+
+//* creating an album
+export const createAlbum = async (req: Request, res: Response) => {
+    try {
+        const { title, artist, releaseYear } = req.body;
+
+        if (!title || !artist || !releaseYear) {
+            res.status(400).json({
+                success: false,
+                message: 'All fields are required',
+            });
+        }
+
+        //* extract local file path
+        const localFilePath = req.file?.path;
+
+        //* upload success to cloudinary
+        const uploadResponse = await uploadToCloudinary([
+            localFilePath as string,
+        ]);
+        const imageUrl = uploadResponse?.[0].secure_url;
+
+        //* create album document
+        const album = await Album.create({
+            title,
+            artist,
+            imageUrl,
+            releaseYear,
+        });
+
+        //* send response
+        if (!album) {
+            res.status(500).json({
+                success: false,
+                message: "Server error: Couldn't create the album",
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            message: 'Album created successfully',
+            data: album,
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            logger.error('Something went wrong while creating album', {
+                error: error.message,
+            });
+        } else {
+            logger.error('Something went wrong while creating album', {
+                error: JSON.stringify(error),
+            });
+        }
+    }
+};

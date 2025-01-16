@@ -3,6 +3,7 @@ import {
     uploadSong,
     getAdminProfile,
     deleteSong,
+    createAlbum,
 } from '../controllers/admin.controller';
 import { Router } from 'express';
 import { upload } from '../middlewares/multer.middleware';
@@ -23,5 +24,13 @@ router.post(
 );
 
 router.delete('/delete-song/:id', verifyJwt, verifyAdmin, deleteSong);
+
+router.post(
+    '/create-album',
+    verifyJwt,
+    verifyAdmin,
+    upload.single('image'),
+    createAlbum
+);
 
 export default router;
