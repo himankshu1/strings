@@ -115,21 +115,26 @@ export const uploadSong = async (req: Request, res: Response): Promise<any> => {
 
 //* get all songs
 export const getAllSongs = async (req: Request, res: Response) => {
-    const songs = await Song.find();
+    try {
+        //* -1 means sort in descending order on createdAt
+        const songs = await Song.find().sort({ createdAt: -1 });
 
-    if (!songs) {
-        res.status(404).json({
+        if (!songs) {
+            res.status(404).json({
+                success: false,
+                message: 'no songs found',
+                data: [],
+            });
+        }
+
+        res.status(200).json({
             success: false,
-            message: 'no songs found',
-            data: [],
+            message: 'songs found',
+            data: songs,
         });
+    } catch (error) {
+        console.log(error);
     }
-
-    res.status(200).json({
-        success: false,
-        message: 'songs found',
-        data: songs,
-    });
 };
 
 //* deleting a song
