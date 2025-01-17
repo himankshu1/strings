@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import { UserModel } from '../models/user.model';
 import { IRequestWithUser } from 'middlewares/auth.middleware';
 import { JwtPayload } from 'jsonwebtoken';
@@ -111,6 +111,25 @@ export const uploadSong = async (req: Request, res: Response): Promise<any> => {
             message: 'An error occurred while uploading files.',
         });
     }
+};
+
+//* get all songs
+export const getAllSongs = async (req: Request, res: Response) => {
+    const songs = await Song.find();
+
+    if (!songs) {
+        res.status(404).json({
+            success: false,
+            message: 'no songs found',
+            data: [],
+        });
+    }
+
+    res.status(200).json({
+        success: false,
+        message: 'songs found',
+        data: songs,
+    });
 };
 
 //* deleting a song
