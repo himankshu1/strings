@@ -44,7 +44,7 @@ export const getAlbumById = async (req: Request, res: Response) => {
         }
 
         //* finding the album document
-        const album = await Album.findById(albumId);
+        const album = await Album.findById(albumId).populate('songs');
 
         //* if album not found by the id
         if (!album) {
