@@ -9,7 +9,7 @@ const songSchema = new mongoose.Schema(
         artist: {
             type: [String],
             required: true,
-            min: [3, 'artist name should be atleast 3 characters'],
+            min: [3, 'artist name should be at least 3 characters'],
         },
         imageUrl: {
             type: String,

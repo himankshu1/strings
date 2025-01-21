@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.route';
 import adminRoutes from './routes/admin.route';
 import albumRoutes from './routes/album.route';
+import songRoutes from './routes/song.route';
 
 //* creating an express instance
 const app = express();
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/album', albumRoutes);
+app.use('/api/song', songRoutes);
 
 //? Global Error Handler
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
