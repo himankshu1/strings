@@ -13,5 +13,6 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/logout', verifyJwt, logoutUser);
 router.get('/get-all-users', verifyJwt, getAllUsers);
+//todo - get user messages
 
 export default router;
