@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Song } from '../models/song.model';
-import logger from 'config/logger';
+import logger from '../config/logger';
 
 // TODO: build logic for getting featured songs with randomly. Save the songs that users listens to frequently and based on the genres, pick the songs from db and display the same
 
