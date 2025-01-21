@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { createUser, signinUser } from '../services/user.service';
 import { IRequestWithUser } from '../middlewares/auth.middleware';
 import { UserModel } from '../models/user.model';
+import logger from '../config/logger';
 
 export const registerUser: any = async (req: Request, res: Response) => {
     //* validate request
@@ -83,4 +84,29 @@ export const logoutUser: any = async (req: IRequestWithUser, res: Response) => {
         success: true,
         message: 'User logged out successfully',
     });
+};
+
+export const getAllUsers = async (req: Request, res: Response) => {
+    try {
+        const allUsers = await UserModel.find({});
+
+        if (!allUsers) {
+            res.status(404).json({
+                success: false,
+                message: 'no users found',
+                data: [],
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'users found',
+            data: allUsers,
+        });
+    } catch (error) {
+        console.log(error);
+        logger.error('Something went wrong while fetching all users', {
+            error: JSON.stringify(error),
+        });
+    }
 };
