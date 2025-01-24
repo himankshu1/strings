@@ -4,10 +4,13 @@ import {
     loginUser,
     logoutUser,
     getAllUsers,
+    getCurrentUser,
 } from '../controllers/user.controller';
 import { Router } from 'express';
 
 const router = Router();
+
+router.get('/me', verifyJwt, getCurrentUser);
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);

@@ -4,6 +4,38 @@ import { IRequestWithUser } from '../middlewares/auth.middleware';
 import { UserModel } from '../models/user.model';
 import logger from '../config/logger';
 
+export const getCurrentUser = async (req: IRequestWithUser, res: Response) => {
+    try {
+        const currentUser = await UserModel.findById(req.user?.id).select(
+            '-password'
+        );
+
+        if (!currentUser) {
+            res.status(404).json({
+                success: false,
+                message: 'User not found. Please login again',
+                data: null,
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'User found',
+            data: currentUser,
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            logger.error('Error while getting current user', {
+                error: error.message,
+            });
+        } else {
+            logger.error('Error while getting current user', {
+                error: JSON.stringify(error),
+            });
+        }
+    }
+};
+
 export const registerUser: any = async (req: Request, res: Response) => {
     //* validate request
     const { fullName, email, password } = req.body;

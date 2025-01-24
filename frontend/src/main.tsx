@@ -1,17 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import { BrowserRouter, Route, Routes } from 'react-router';
-import HomePage from './pages/HomePage';
-import AuthCallbackPage from './pages/AuthCallbackPage';
+import { BrowserRouter } from 'react-router';
+
+import { AuthProvider } from './providers/AuthProvider';
+import App from './App';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/auth-callback" element={<AuthCallbackPage />} />
-            </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </AuthProvider>
     </StrictMode>
 );

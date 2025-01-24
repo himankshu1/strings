@@ -29,7 +29,7 @@ export const Config: {
 } = {
     PORT: PORT || '3000',
     NODE_ENV: NODE_ENV || 'development',
-    CORS_ORIGIN: CORS_ORIGIN || '*',
+    CORS_ORIGIN: CORS_ORIGIN as string,
     MONGODB_URI: MONGODB_URI as string,
     JWT_SECRET: JWT_SECRET as string,
     JWT_EXPIRY: JWT_EXPIRY || '1h',

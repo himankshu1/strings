@@ -7,36 +7,42 @@ export interface IRequestWithUser extends Request {
 }
 
 //* verifying the token
-export const verifyJwt = async (
+export const verifyJwt: any = async (
     req: IRequestWithUser,
     res: Response,
     next: NextFunction
 ) => {
     try {
-        // Retrieve token from cookies or Authorization header
+        //* Retrieve token from cookies or Authorization header
         const token =
             req.cookies.token || req.headers.authorization?.split(' ')[1];
 
-        // Check if the token exists
+        // console.log('token :::', token);
+
+        //* Check if the token exists
         if (!token) {
-            res.status(401).json({
+            console.log('token not found');
+
+            return res.status(401).json({
                 success: false,
                 message: 'Unauthorized access. Please login again',
             });
         }
 
-        // Verify the JWT
+        //* Verify the JWT
         const decoded = jwt.verify(token, Config.JWT_SECRET) as jwt.JwtPayload;
+        // console.log('decoded token :::', decoded);
 
-        // Add decoded information to the request object (optional)
+        //* Add decoded information to the request object (optional)
         req.user = decoded;
 
         next();
     } catch (error) {
         console.error('JWT verification failed:', error);
-        res.status(401).json({
+        return res.status(401).json({
             success: false,
-            message: 'Invalid or expired token. Please login again.',
+            message:
+                'Something went wrong while verifying JWT. Verification failed',
         });
     }
 };

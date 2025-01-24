@@ -22,7 +22,7 @@ export const createUser = async (
             return { result: { error: true, message: 'User already exists' } };
         }
 
-        const user = await UserModel.create({
+        let user = await UserModel.create({
             fullName,
             email,
             password,
