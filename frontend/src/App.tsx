@@ -1,27 +1,18 @@
-import { Route, Routes, useNavigate } from 'react-router';
+import { Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import { useContext, useEffect } from 'react';
-import { AuthContext } from './providers/AuthProvider';
+import MainLayout from './layouts/MainLayout';
 
 const App = () => {
-    const navigate = useNavigate();
-    const { user } = useContext(AuthContext)!;
-
-    // useEffect(() => {
-    //     if (user) {
-    //         navigate('/');
-    //     } else {
-    //         navigate('/login');
-    //     }
-    // }, [navigate, user]);
-
     return (
         <Routes>
-            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+
+            <Route element={<MainLayout />}>
+                <Route path="/" element={<HomePage />} />
+            </Route>
         </Routes>
     );
 };

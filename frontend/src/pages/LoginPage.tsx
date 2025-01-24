@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '@/providers/AuthProvider';
 import { useNavigate } from 'react-router';
+import { Loader2 } from 'lucide-react';
 
 type LoginFormType = {
     email: string;
@@ -16,7 +17,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
 
-    const { login } = useContext(AuthContext)!;
+    const { login, isLoading } = useContext(AuthContext)!;
 
     const submitHandler = async (e: FormEvent) => {
         e.preventDefault();
@@ -64,7 +65,11 @@ const LoginPage = () => {
                         }
                     />
                     <button className="w-full bg-blue-500 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition">
-                        Login
+                        {isLoading ? (
+                            <Loader2 className="animate-spin" />
+                        ) : (
+                            'Login'
+                        )}
                     </button>
                 </form>
             </div>
