@@ -9,13 +9,13 @@ const App = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext)!;
 
-    useEffect(() => {
-        if (user) {
-            navigate('/');
-        } else {
-            navigate('/login');
-        }
-    }, [navigate, user]);
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate('/');
+    //     } else {
+    //         navigate('/login');
+    //     }
+    // }, [navigate, user]);
 
     return (
         <Routes>
