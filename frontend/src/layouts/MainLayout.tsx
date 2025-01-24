@@ -1,3 +1,4 @@
+import LeftSidebar from '@/components/LeftSidebar';
 import {
     ResizableHandle,
     ResizablePanel,
@@ -12,7 +13,7 @@ const MainLayout = () => {
         <div className="h-screen bg-black text-white flex flex-col">
             <ResizablePanelGroup
                 direction="horizontal"
-                className="flex-1 flex h-full overflow-hidden"
+                className="flex-1 flex h-full overflow-hidden gap-2 px-2"
             >
                 {/* left sidebar */}
                 <ResizablePanel
@@ -20,7 +21,7 @@ const MainLayout = () => {
                     minSize={isMobile ? 0 : 10}
                     maxSize={30}
                 >
-                    left panel
+                    <LeftSidebar />
                 </ResizablePanel>
 
                 <ResizableHandle withHandle={!isMobile} />

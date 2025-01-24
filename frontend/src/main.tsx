@@ -5,13 +5,16 @@ import { BrowserRouter } from 'react-router';
 
 import { AuthProvider } from './providers/AuthProvider';
 import App from './App';
+import MusicProvider from './providers/MusicProvider';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <AuthProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+            <MusicProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </MusicProvider>
         </AuthProvider>
     </StrictMode>
 );
