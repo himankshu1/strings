@@ -6,7 +6,7 @@ import logger from '../config/logger';
 export const getAllAlbums = async (req: Request, res: Response) => {
     try {
         //* query all album
-        const albums = await Album.find();
+        const albums = await Album.find().populate('songs');
 
         if (albums.length === 0) {
             res.status(200).json({ success: true, message: 'no albums found' });

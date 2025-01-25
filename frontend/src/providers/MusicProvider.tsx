@@ -15,7 +15,6 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const fetchAllAlbumsAndSongs = async () => {
             await getAllAlbums();
-            // await getAllSongs();
         };
         fetchAllAlbumsAndSongs();
     }, []);
@@ -25,6 +24,8 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
         try {
             setIsLoading(true);
             const { data } = await axiosClient.get('/album/get-albums');
+            console.log('all albums', data);
+
             setAlbums(data);
         } catch (error) {
             console.log(error);
@@ -40,6 +41,8 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
             const { data } = await axiosClient.get(
                 `/album/get-album/${albumId}`
             );
+            console.log('album by id', data);
+
             return data;
         } catch (error) {
             console.log(error);

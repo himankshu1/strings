@@ -4,7 +4,7 @@ interface AlbumType {
     artist: string[];
     imageUrl: string;
     releaseYear: number;
-    songs: string[];
+    songs: SongType[];
 }
 
 interface SongType {
@@ -15,8 +15,8 @@ interface SongType {
     audioUrl: string;
     duration: number;
     albumId: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface MusicContextType {
