@@ -67,6 +67,7 @@ const LeftSidebar = () => {
                         {isLoading ? (
                             <PlaylistSkeleton />
                         ) : (
+                            //* albums playlist showcase
                             <>
                                 {albums.map((album) => (
                                     <Link

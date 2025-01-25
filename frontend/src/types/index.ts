@@ -25,5 +25,10 @@ export interface MusicContextType {
     isLoading: boolean;
     setIsLoading: (isLoading: boolean) => void;
     getAllAlbums: () => Promise<void>;
+    getAlbumById: (albumId: string) => Promise<void>;
     getAllSongs: () => Promise<void>;
 }
+
+export type AlbumParam = {
+    albumId: string;
+};

@@ -33,6 +33,21 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+    //* get album by id
+    const getAlbumById = async (albumId: string) => {
+        try {
+            setIsLoading(true);
+            const { data } = await axiosClient.get(
+                `/album/get-album/${albumId}`
+            );
+            return data;
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     //* get all songs
     const getAllSongs = async () => {
         try {
@@ -54,6 +69,7 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
                 isLoading,
                 setIsLoading,
                 getAllAlbums,
+                getAlbumById,
                 getAllSongs,
             }}
         >
