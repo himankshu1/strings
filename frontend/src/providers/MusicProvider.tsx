@@ -1,34 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { axiosClient } from '@/lib/axios';
+import { MusicContextType } from '@/types';
 import { createContext, ReactNode, useEffect, useState } from 'react';
-
-type AlbumType = {
-    _id: string;
-    title: string;
-    artist: string[];
-    imageUrl: string;
-    releaseYear: number;
-    songs: string[];
-};
-
-type SongType = {
-    _id: string;
-    title: string;
-    artist: string[];
-    imageUrl: string;
-    audioUrl: string;
-    duration: number;
-    albumId: string;
-};
-
-export type MusicContextType = {
-    albums: AlbumType[];
-    songs: SongType[];
-    isLoading: boolean;
-    setIsLoading: (isLoading: boolean) => void;
-    getAllAlbums: () => Promise<void>;
-    getAllSongs: () => Promise<void>;
-};
 
 export const MusicContext = createContext<MusicContextType | undefined>(
     undefined

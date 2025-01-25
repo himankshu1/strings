@@ -64,7 +64,33 @@ const LeftSidebar = () => {
 
                 <ScrollArea className="h-[calc(100vh-300px)]">
                     <div className="space-y-2">
-                        {isLoading ? <PlaylistSkeleton /> : 'Some playlists'}
+                        {isLoading ? (
+                            <PlaylistSkeleton />
+                        ) : (
+                            <>
+                                {albums.map((album) => (
+                                    <Link
+                                        key={album.title}
+                                        to={`/album/get-album/${album._id}`}
+                                        className="p-2 hover:bg-zinc-800 rounded-md flex items-center gap-3 group"
+                                    >
+                                        <img
+                                            src={album.imageUrl}
+                                            alt={album.title}
+                                            className="size-14 rounded-md flex-shrink-0 object-cover"
+                                        />
+                                        <div className="flex-1 min-w-0 hidden md:block">
+                                            <p className="font-medium truncate">
+                                                {album.title}
+                                            </p>
+                                            <p className="text-sm text-zinc-400 truncate">
+                                                Album ⋅ {album.artist[0]}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </>
+                        )}
                     </div>
                 </ScrollArea>
             </div>
