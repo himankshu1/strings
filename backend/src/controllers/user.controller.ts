@@ -61,7 +61,11 @@ export const registerUser: any = async (req: Request, res: Response) => {
 
     //* return response
     return res
-        .cookie('token', result.token, { httpOnly: true, secure: true })
+        .cookie('token', result.token, {
+            httpOnly: true,
+            secure: true,
+            maxAge: 24 * 60 * 60 * 1000,
+        })
         .status(201)
         .json({
             success: true,
@@ -96,7 +100,7 @@ export const loginUser: any = async (req: Request, res: Response) => {
         .cookie('token', result.token, {
             secure: true,
             httpOnly: true,
-            maxAge: 60 * 1000,
+            maxAge: 24 * 60 * 60 * 1000,
         })
         .status(200)
         .json({
