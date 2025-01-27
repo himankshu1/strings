@@ -93,7 +93,11 @@ export const loginUser: any = async (req: Request, res: Response) => {
     }
 
     return res
-        .cookie('token', result.token, { secure: true, httpOnly: true })
+        .cookie('token', result.token, {
+            secure: true,
+            httpOnly: true,
+            maxAge: 60 * 1000,
+        })
         .status(200)
         .json({
             success: true,
@@ -121,7 +125,7 @@ export const logoutUser: any = async (req: IRequestWithUser, res: Response) => {
 export const getAllUsers = async (req: IRequestWithUser, res: Response) => {
     try {
         const currentUserId = req.user?._id;
-        const allUsers = await UserModel.find({ _id: { $ne: currentUserId } });
+        const allUsers = await UserModel.find();
 
         if (!allUsers) {
             res.status(404).json({
