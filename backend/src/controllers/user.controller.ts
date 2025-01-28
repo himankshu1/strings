@@ -128,8 +128,10 @@ export const logoutUser: any = async (req: IRequestWithUser, res: Response) => {
 
 export const getAllUsers = async (req: IRequestWithUser, res: Response) => {
     try {
-        const currentUserId = req.user?._id;
-        const allUsers = await UserModel.find();
+        const currentUserId = req.user?.id;
+
+        //* not fetching the current user
+        const allUsers = await UserModel.find({ _id: { $ne: currentUserId } });
 
         if (!allUsers) {
             res.status(404).json({

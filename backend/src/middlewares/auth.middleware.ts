@@ -31,7 +31,6 @@ export const verifyJwt: any = async (
 
         //* Verify the JWT
         const decoded = jwt.verify(token, Config.JWT_SECRET) as jwt.JwtPayload;
-        // console.log('decoded token :::', decoded);
 
         //* Add decoded information to the request object (optional)
         req.user = decoded;
