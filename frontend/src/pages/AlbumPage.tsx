@@ -16,7 +16,7 @@ const AlbumPage = () => {
     const { albums } = useContext(MusicContext)!;
     const { albumId } = useParams<AlbumParam>();
 
-    console.log('albums', albums);
+    // console.log('albums', albums);
 
     const filteredAlbum = albums.filter((album) => album._id === albumId);
 

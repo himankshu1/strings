@@ -17,7 +17,7 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
         try {
             setIsLoading(true);
             const { data } = await axiosClient.get('/album/get-albums');
-            console.log('all albums', data);
+            // console.log('all albums', data);
 
             setAlbums(data);
         } catch (error) {

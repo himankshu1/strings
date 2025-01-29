@@ -1,3 +1,4 @@
+import FriendsActivity from '@/components/FriendsActivity';
 import LeftSidebar from '@/components/LeftSidebar';
 import {
     ResizableHandle,
@@ -40,7 +41,7 @@ const MainLayout = () => {
                     maxSize={25}
                     collapsedSize={0}
                 >
-                    friends listening to
+                    <FriendsActivity />
                 </ResizablePanel>
             </ResizablePanelGroup>
         </div>

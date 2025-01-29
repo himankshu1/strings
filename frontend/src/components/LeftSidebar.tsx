@@ -14,7 +14,7 @@ const LeftSidebar = () => {
 
     const isLoading = false;
 
-    console.log(albums);
+    // console.log('all albums', albums);
 
     return (
         <div className="h-full flex flex-col gap-2">

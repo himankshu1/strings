@@ -1,4 +1,26 @@
-interface AlbumType {
+import { SignupFormType } from '@/pages/SignupPage';
+
+type UserType = {
+    createdAt: string;
+    email: string;
+    fullName: string;
+    imageUrl: string;
+    role: string;
+    updatedAt: string;
+    _id: string;
+};
+
+export interface AuthContextType {
+    user: UserType | null;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    signup: (userData: SignupFormType) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => void;
+    checkAuth: () => Promise<void>;
+}
+
+export interface AlbumType {
     _id: string;
     title: string;
     artist: string[];
@@ -25,10 +47,25 @@ export interface MusicContextType {
     isLoading: boolean;
     setIsLoading: (isLoading: boolean) => void;
     getAllAlbums: () => Promise<void>;
-    getAlbumById: (albumId: string) => Promise<void>;
     getAllSongs: () => Promise<void>;
 }
 
 export type AlbumParam = {
     albumId: string;
 };
+
+type User = {
+    _id: string;
+    fullName: string;
+    email: string;
+    role: string;
+    imageUrl: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export interface IChatContext {
+    users: User[];
+    fetchUsers: () => Promise<void>;
+    isLoading: boolean;
+}

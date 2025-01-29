@@ -2,16 +2,17 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { axiosClient } from '../lib/axios';
 import { SignupFormType } from '@/pages/SignupPage';
+import { AuthContextType } from '@/types';
 
-export interface AuthContextType {
-    user: object | null;
-    isAuthenticated: boolean;
-    isLoading: boolean;
-    signup: (userData: SignupFormType) => Promise<void>;
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => void;
-    checkAuth: () => Promise<void>;
-}
+// export interface AuthContextType {
+//     user: object | null;
+//     isAuthenticated: boolean;
+//     isLoading: boolean;
+//     signup: (userData: SignupFormType) => Promise<void>;
+//     login: (email: string, password: string) => Promise<void>;
+//     logout: () => void;
+//     checkAuth: () => Promise<void>;
+// }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
     undefined
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 '/users/register',
                 userData
             );
-            console.log(data);
+            // console.log(data);
 
             setUser(data);
             setIsAuthenticated(true);
@@ -55,7 +56,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 email,
                 password,
             });
-            console.log(data);
+            // console.log('User logged in', data);
 
             setUser(data);
             setIsAuthenticated(true);
@@ -82,7 +83,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const checkAuth = async () => {
         try {
             const { data } = await axiosClient.get('/users/me');
-            console.log('user data :: ', data);
+            // console.log('user data :: ', data);
 
             setUser(data);
             setIsAuthenticated(true);
