@@ -12,13 +12,6 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
     const [songs, setSongs] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        const fetchAllAlbumsAndSongs = async () => {
-            await getAllAlbums();
-        };
-        fetchAllAlbumsAndSongs();
-    }, []);
-
     //* get all albums
     const getAllAlbums = async () => {
         try {
@@ -27,23 +20,6 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
             console.log('all albums', data);
 
             setAlbums(data);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    //* get album by id
-    const getAlbumById = async (albumId: string) => {
-        try {
-            setIsLoading(true);
-            const { data } = await axiosClient.get(
-                `/album/get-album/${albumId}`
-            );
-            console.log('album by id', data);
-
-            return data;
         } catch (error) {
             console.log(error);
         } finally {
@@ -64,6 +40,13 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+    useEffect(() => {
+        const fetchAllAlbumsAndSongs = async () => {
+            await getAllAlbums();
+        };
+        fetchAllAlbumsAndSongs();
+    }, []);
+
     return (
         <MusicContext.Provider
             value={{
@@ -72,7 +55,6 @@ const MusicProvider = ({ children }: { children: ReactNode }) => {
                 isLoading,
                 setIsLoading,
                 getAllAlbums,
-                getAlbumById,
                 getAllSongs,
             }}
         >

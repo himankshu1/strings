@@ -16,14 +16,13 @@ const AlbumPage = () => {
     const { albums } = useContext(MusicContext)!;
     const { albumId } = useParams<AlbumParam>();
 
+    console.log('albums', albums);
+
     const filteredAlbum = albums.filter((album) => album._id === albumId);
-    console.log(filteredAlbum);
 
     const currentAlbum = filteredAlbum[0];
     const currentSong = currentAlbum?.songs[0];
     const isPlaying = false;
-
-    console.log(currentSong.createdAt);
 
     const handlePlayAlbum = () => {};
 
@@ -31,8 +30,6 @@ const AlbumPage = () => {
         console.log(index);
 
         if (!currentAlbum) return;
-
-        // playAlbum(currentAlbum?.songs, index);
     };
 
     return (
