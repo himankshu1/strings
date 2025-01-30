@@ -29,7 +29,7 @@ export interface AlbumType {
     songs: SongType[];
 }
 
-interface SongType {
+export interface SongType {
     _id: string;
     title: string;
     artist: string[];
