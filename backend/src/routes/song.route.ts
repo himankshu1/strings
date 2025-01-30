@@ -7,10 +7,10 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/featured-songs', getFeaturedSongs);
+router.get('/featured', getFeaturedSongs);
 
-router.get('/made-for-you-songs', getMadeForYouSongs);
+router.get('/made-for-you', getMadeForYouSongs);
 
-router.get('/trending-songs', getTrendingSongs);
+router.get('/trending', getTrendingSongs);
 
 export default router;

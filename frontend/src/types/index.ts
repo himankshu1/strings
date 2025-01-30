@@ -48,6 +48,12 @@ export interface MusicContextType {
     setIsLoading: (isLoading: boolean) => void;
     getAllAlbums: () => Promise<void>;
     getAllSongs: () => Promise<void>;
+    featuredSongs: SongType[];
+    getFeaturedSongs: () => Promise<void>;
+    getMadeForYouSongs: () => Promise<void>;
+    madeForYouSongs: SongType[];
+    getTrendingSongs: () => Promise<void>;
+    trendingSongs: SongType[];
 }
 
 export type AlbumParam = {

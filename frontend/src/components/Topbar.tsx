@@ -10,7 +10,7 @@ const Topbar = () => {
 
     const isAdmin = user?.role === 'admin';
 
-    console.log(user);
+    // console.log(user);
 
     // todo: login with google redirect. build authcallback page thats shows "Logging you in" for after-redirect from google signin
 

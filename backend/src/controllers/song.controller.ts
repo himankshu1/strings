@@ -41,7 +41,7 @@ export const getFeaturedSongs = async (req: Request, res: Response) => {
 
 export const getMadeForYouSongs = async (req: Request, res: Response) => {
     try {
-        //* fetch random 6 songs
+        //* fetch random 4 songs
         const songs = await Song.aggregate([
             {
                 $sample: { size: 4 },
@@ -63,7 +63,7 @@ export const getMadeForYouSongs = async (req: Request, res: Response) => {
 
         res.status(200).json({
             success: true,
-            message: 'Top 6 featured songs',
+            message: 'Top featured songs',
             data: songs,
         });
     } catch (error) {
