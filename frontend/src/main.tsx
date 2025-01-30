@@ -7,15 +7,18 @@ import { AuthProvider } from './providers/AuthProvider';
 import App from './App';
 import MusicProvider from './providers/MusicProvider';
 import ChatProvider from './providers/ChatProvider';
+import PlayerProvider from './providers/PlayerProvider';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <AuthProvider>
             <ChatProvider>
                 <MusicProvider>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
+                    <PlayerProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </PlayerProvider>
                 </MusicProvider>
             </ChatProvider>
         </AuthProvider>

@@ -75,3 +75,17 @@ export interface IChatContext {
     fetchUsers: () => Promise<void>;
     isLoading: boolean;
 }
+
+export interface PlayerContextType {
+    isPlaying: boolean;
+    currentSong: SongType | null;
+    queue: SongType[];
+    currentIndex: number;
+    setCurrentSongPlaying: (song: SongType | null) => void;
+    initializeQueue: (songs: SongType[]) => void;
+    playAlbum: (songs: SongType[], startIndex?: number) => void;
+    setCurrentSong: (song: SongType | null) => void;
+    togglePlay: () => void;
+    playNext: () => void;
+    playPrevious: () => void;
+}
